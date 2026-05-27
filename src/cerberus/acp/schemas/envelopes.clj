@@ -5,7 +5,7 @@
   (:require [malli.core :as malli]
             [cerberus.acp.schemas.primitives :refer [RequestId]]
             [cerberus.acp.schemas.api :refer [SessionNotification ExtNotification ExtRequest ExtResponse
-                                              Error
+                                              JSONRPCError
                                               WriteTextFileRequest ReadTextFileRequest
                                               RequestPermissionRequest
                                               CreateTerminalRequest TerminalOutputRequest
@@ -81,7 +81,7 @@
    [:map {:title "Error"}
     [:jsonrpc [:= "2.0"]]
     [:id RequestId]
-    [:error Error]]])
+    [:error JSONRPCError]]])
 
 ;; JSON-RPC 2.0 Request sent by client to agent.
 (def ClientRequestEnvelope
@@ -136,4 +136,4 @@
    [:map {:title "Error"}
     [:jsonrpc [:= "2.0"]]
     [:id RequestId]
-    [:error Error]]])
+    [:error JSONRPCError]]])

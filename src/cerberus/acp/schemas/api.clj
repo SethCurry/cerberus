@@ -28,7 +28,7 @@
    [:signal {:optional true} [:maybe :string]]])
 
 ;; JSON-RPC error object.
-(def Error
+(def JSONRPCError
   [:map
    [:code ErrorCode]
    [:data {:optional true} :any]

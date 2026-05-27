@@ -24,11 +24,12 @@
                                               SetSessionModeRequest SetSessionModeResponse
                                               SetSessionConfigOptionRequest SetSessionConfigOptionResponse
                                               CancelNotification PromptRequest PromptResponse
-                                              Error]]))
+                                              JSONRPCError]]))
 
 ;; Internal: All possible notifications that an agent can send to a client.
 (def AgentNotification
   [:map
+   {:closed true}
    Meta
    [:method :string]
    [:params {:optional true}
@@ -79,7 +80,7 @@
    [:map {:title "Error"}
     Meta
     [:id RequestId]
-    [:error Error]]])
+    [:error JSONRPCError]]])
 
 ;; Internal: All possible notifications that a client can send to an agent.
 (def ClientNotification
@@ -134,4 +135,4 @@
    [:map {:title "Error"}
     Meta
     [:id RequestId]
-    [:error Error]]])
+    [:error JSONRPCError]]])
