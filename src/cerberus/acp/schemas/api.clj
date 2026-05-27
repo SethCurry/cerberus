@@ -322,3 +322,14 @@
 (def KillTerminalResponse
   [:map
    Meta])
+
+(defn get-message-schema [message-data]
+  (let [message-method (get message-data :method)]
+  (case message-method
+    "initialize" InitializeRequest
+    "session/new" NewSessionRequest
+    "session/prompt" PromptRequest
+    "session/list" ListSessionsRequest
+    "session/update" SessionUpdate
+    (throw (ex-info "Unknown JSONRPC method"
+      {:method message-method})))))

@@ -5,7 +5,8 @@
             :url "https://www.eclipse.org/legal/epl-2.0/"}
   :dependencies [[org.clojure/clojure "1.11.1"]
     [com.taoensso/telemere "1.2.1"]
-    [metosin/malli "0.20.1"]]
+    [metosin/malli "0.20.1"]
+    [metosin/jsonista "1.0.0"]]
   :main ^:skip-aot cerberus.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all
