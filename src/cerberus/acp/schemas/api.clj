@@ -324,12 +324,34 @@
    Meta])
 
 (defn get-message-schema [message-data]
-  (let [message-method (get message-data :method)]
-  (case message-method
-    "initialize" InitializeRequest
-    "session/new" NewSessionRequest
-    "session/prompt" PromptRequest
-    "session/list" ListSessionsRequest
-    "session/update" SessionUpdate
-    (throw (ex-info "Unknown JSONRPC method"
-      {:method message-method})))))
+    (let [message-method (get message-data :method)]
+      (case message-method
+        ;; Initialize
+        "initialize" InitializeRequest
+        ;; Authentication
+        "authenticate" AuthenticateRequest
+        ;; Logout
+        "logout" LogoutRequest
+        ;; Session methods
+        "session/new" NewSessionRequest
+        "session/load" LoadSessionRequest
+        "session/list" ListSessionsRequest
+        "session/resume" ResumeSessionRequest
+        "session/close" CloseSessionRequest
+        "session/prompt" PromptRequest
+        "session/cancel" CancelNotification
+        "session/update" SessionUpdate
+        "session/request_permission" RequestPermissionRequest
+        "session/set_mode" SetSessionModeRequest
+        "session/set_config_option" SetSessionConfigOptionRequest
+        ;; File system methods
+        "fs/read_text_file" ReadTextFileRequest
+        "fs/write_text_file" WriteTextFileRequest
+        ;; Terminal methods
+        "terminal/create" CreateTerminalRequest
+        "terminal/output" TerminalOutputRequest
+        "terminal/release" ReleaseTerminalRequest
+        "terminal/wait_for_exit" WaitForTerminalExitRequest
+        "terminal/kill" KillTerminalRequest
+        (throw (ex-info "Unknown JSONRPC method"
+          {:method message-method})))))
